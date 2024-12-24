@@ -70,7 +70,14 @@ function EventRegForm() {
       if (validateForm()) {
         const response = await axios.post(
           "http://localhost:8000/api/Event/EventRegister",
-          { username, email, Contact, eventName, eventDate, payment }
+          {
+            username,
+            email,
+            Contact,
+            eventName,
+            eventDate,
+            payment,
+          }
         );
         if (response.data) alert("Form submitted successfully!");
         console.log("Form submitted");

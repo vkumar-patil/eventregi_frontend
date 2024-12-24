@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 function UplodEventFom() {
-  const [compony, setCompony] = useState("");
+  const [company, setCompony] = useState("");
   const [eventName, setEventname] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [location, setLocation] = useState("");
@@ -12,7 +12,7 @@ function UplodEventFom() {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/Event/upcomingEvent",
-        { compony, eventName, eventDate, location, discription }
+        { company, eventName, eventDate, location, discription }
       );
       if (response.data) {
         alert("event added successfuly");
@@ -41,7 +41,7 @@ function UplodEventFom() {
             class="form-control"
             id="exampleInputCompony1"
             aria-describedby="ComponyHelp"
-            value={compony}
+            value={company}
             onChange={(e) => setCompony(e.target.value)}
           />
         </div>

@@ -20,14 +20,32 @@ function GetRegisterdUser() {
     fetchdata();
   }, []);
 
+  // Define formatDate function here
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    if (isNaN(date)) {
+      return "Invalid Date";
+    }
+    return date.toISOString().split("T")[0]; // Outputs: YYYY-MM-DD
+  };
+
   return (
     <div className="container mt-4">
       <div className="card bg-info text-white">
         <div className="card-header text-center">
           <h4>Registered Users</h4>
         </div>
-        <div className="card-body">
-          {/* Add table-responsive wrapper */}
+        <div
+          className="card-body scroll-container"
+          style={{
+            maxHeight: "380px", // Adjust height as needed
+            overflowY: "scroll", // Enables vertical scrolling
+            overflowX: "hidden", // Hides horizontal scrolling
+            border: "1px solid #ccc", // Optional: Add a border for styling
+            padding: "10px",
+            borderRadius: "10px",
+          }}
+        >
           <div className="table-responsive">
             <table className="table table-sm table-bordered text-center">
               <thead className="thead-dark">
@@ -45,7 +63,7 @@ function GetRegisterdUser() {
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{item.eventName}</td>
-                    <td>{item.eventDate}</td>
+                    <td>{formatDate(item.eventDate)}</td>
                     <td>{item.username}</td>
                     <td>{item.email}</td>
                     <td>{item.Contact}</td>
