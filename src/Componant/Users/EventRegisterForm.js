@@ -68,8 +68,9 @@ function EventRegForm() {
     e.preventDefault();
     try {
       if (validateForm()) {
+        const token = localStorage.getItem("token");
         const response = await axios.post(
-          "http://localhost:8000/api/Event/EventRegister",
+          "https://eventregibackend-production-23e8.up.railway.app/api/Event/EventRegister",
           {
             username,
             email,
@@ -77,6 +78,11 @@ function EventRegForm() {
             eventName,
             eventDate,
             payment,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Add JWT token here
+            },
           }
         );
         if (response.data) alert("Form submitted successfully!");

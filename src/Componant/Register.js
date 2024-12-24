@@ -16,7 +16,7 @@ function Register() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/user/register",
+        "https://eventregibackend-production-23e8.up.railway.app/api/user/register",
         {
           username,
           email,

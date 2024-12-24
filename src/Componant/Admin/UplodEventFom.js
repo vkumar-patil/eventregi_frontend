@@ -10,9 +10,16 @@ function UplodEventFom() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const token = localStorage.getItem("token");
+
       const response = await axios.post(
-        "http://localhost:8000/api/Event/upcomingEvent",
-        { company, eventName, eventDate, location, discription }
+        "https://eventregibackend-production-23e8.up.railway.app/api/Event/upcomingEvent",
+        { company, eventName, eventDate, location, discription },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Add JWT token here
+          },
+        }
       );
       if (response.data) {
         alert("event added successfuly");

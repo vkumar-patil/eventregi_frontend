@@ -13,22 +13,36 @@ function Login() {
   const handlelogin = async (e) => {
     e.preventDefault();
 
+    if (!email || !password) {
+      alert("Email and Password are required");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/user/login",
+        "https://localhost:8000/api/user/login",
         { email, password }
       );
+      if (response.data) {
+        console.log(response.data.user);
+      }
       const { token, user } = response.data;
 
+      if (!token || !user) {
+        throw new Error("Invalid response from server");
+      }
+
       localStorage.setItem("token", token);
-      console.log("login successful ", user);
-      if (user.Admin === true) {
+      console.log("Login successful:", user);
+
+      if (user.Admin) {
         navigate("/AdminHomePage");
       } else {
         navigate("/UserHomepage");
       }
     } catch (error) {
-      console.log("login fail", error);
+      console.error("Login failed:", error.response?.data || error.message);
+      alert(error.response?.data?.message || "An error occurred during login");
     }
   };
 

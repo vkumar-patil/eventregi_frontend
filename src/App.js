@@ -4,7 +4,7 @@ import AdminHomePage from "./Componant/Admin/AdminHomePage";
 import UserHomepage from "./Componant/Users/UserHomepage";
 import Login from "./Componant/Login ";
 import Register from "./Componant/Register";
-import ProtectedRoute from "./Componant/Protectroute";
+//import ProtectedRoute from "./Componant/Protectroute";
 function App() {
   return (
     <>
@@ -15,9 +15,9 @@ function App() {
         <Route
           path="/AdminHomePage"
           element={
-            <ProtectedRoute requiredRole={true}>
-              <AdminHomePage />
-            </ProtectedRoute>
+            // <ProtectedRoute requiredRole={true}>
+            <AdminHomePage />
+            // </ProtectedRoute>
           }
         ></Route>
       </Routes>
