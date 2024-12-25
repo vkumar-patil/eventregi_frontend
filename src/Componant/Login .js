@@ -20,11 +20,11 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "https://localhost:8000/api/user/login",
+        "https://eventregibackend-production-cb39.up.railway.app/api/user/login",
         { email, password }
       );
-      if (response.data) {
-        console.log(response.data.user);
+      if (response.data.data) {
+        console.log(response.data);
       }
       const { token, user } = response.data;
 
