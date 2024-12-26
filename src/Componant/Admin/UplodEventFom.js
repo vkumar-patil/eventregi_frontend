@@ -13,7 +13,7 @@ function UplodEventFom() {
       const token = localStorage.getItem("token");
 
       const response = await axios.post(
-        "https://eventregibackend-production-23e8.up.railway.app/api/Event/upcomingEvent",
+        "http://localhost:8000/api/Event/upcomingEvent",
         { company, eventName, eventDate, location, discription },
         {
           headers: {

@@ -1,48 +1,54 @@
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; // Keep this as it is for now
+import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handlelogin = async (e) => {
     e.preventDefault();
+    setError(null);
 
     if (!email || !password) {
-      alert("Email and Password are required");
+      setError("Email and Password are required");
       return;
     }
 
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address");
+      return;
+    }
+
+    setLoading(true);
     try {
       const response = await axios.post(
-        "https://eventregibackend-production-cb39.up.railway.app/api/user/login",
+        "http://localhost:8000/api/user/login",
         { email, password }
       );
-      if (response.data.data) {
-        console.log(response.data);
-      }
-      const { token, user } = response.data;
 
+      const { token, user } = response.data;
       if (!token || !user) {
         throw new Error("Invalid response from server");
       }
 
       localStorage.setItem("token", token);
-      console.log("Login successful:", user);
-
       if (user.Admin) {
         navigate("/AdminHomePage");
       } else {
         navigate("/UserHomepage");
       }
-    } catch (error) {
-      console.error("Login failed:", error.response?.data || error.message);
-      alert(error.response?.data?.message || "An error occurred during login");
+    } catch (err) {
+      console.error("Login failed:", err.response?.data || err.message);
+      setError(err.response?.data?.message || "An error occurred during login");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,6 +56,8 @@ function Login() {
     <div className="login-container">
       <form onSubmit={handlelogin} className="login-form">
         <h4 className="login-heading">Login</h4>
+
+        {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
@@ -61,6 +69,7 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input
@@ -72,9 +81,10 @@ function Login() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          Submit
+        <button type="submit" className="btn btn-primary" disabled={loading}>
+          {loading ? "Loading..." : "Submit"}
         </button>
+
         <p className="register-link">
           Not registered? <Link to={"/Register"}>Register</Link>
         </p>

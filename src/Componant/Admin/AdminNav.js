@@ -21,6 +21,9 @@ function AdminNav() {
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
+            {/* <span class="nav-link active">
+              <Link to={"/DeleteEvents"}>DeleteEvents</Link>
+            </span> */}
             <span class="nav-link active">
               Home <span class="sr-only">(current)</span>
             </span>

@@ -5,12 +5,15 @@ import UserHomepage from "./Componant/Users/UserHomepage";
 import Login from "./Componant/Login ";
 import Register from "./Componant/Register";
 import ProtectedRoute from "./Componant/Protectroute";
+//import DeleteEvents from "./Componant/Admin/UplodedEvent";
 function App() {
   return (
     <>
       <Routes>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/" element={<Login />}></Route>
+        {/* <Route path="/DeleteEvents" element={<DeleteEvents />}></Route> */}
+
         <Route path="/UserHomepage" element={<UserHomepage />}></Route>
         <Route
           path="/AdminHomePage"
