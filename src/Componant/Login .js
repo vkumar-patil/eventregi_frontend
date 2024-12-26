@@ -29,7 +29,7 @@ function Login() {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/user/login",
+        "https://eventregibackend-production-97c8.up.railway.app/api/user/login",
         { email, password }
       );
 

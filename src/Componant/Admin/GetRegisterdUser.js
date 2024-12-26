@@ -8,7 +8,7 @@ function GetRegisterdUser() {
     const fetchdata = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8000/api/Event/getRegisterdUsers"
+          "https://eventregibackend-production-97c8.up.railway.app/api/Event/getRegisterdUsers"
         );
         if (response.data) {
           setData(response.data.data);

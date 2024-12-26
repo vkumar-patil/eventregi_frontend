@@ -92,7 +92,7 @@ function UpcomingEvents() {
   useEffect(() => {
     const fechdata = async () => {
       const response = await axios.get(
-        "http://localhost:8000/api/Event/getEvents"
+        "https://eventregibackend-production-97c8.up.railway.app/api/Event/getEvents"
       );
       try {
         if (response.data) {

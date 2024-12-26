@@ -70,7 +70,7 @@ function EventRegForm() {
       if (validateForm()) {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "http://localhost:8000/api/Event/EventRegister",
+          "https://eventregibackend-production-97c8.up.railway.app/api/Event/EventRegister",
           {
             username,
             email,
